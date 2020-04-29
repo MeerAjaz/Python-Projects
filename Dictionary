@@ -1,0 +1,7 @@
+phonebook = {
+    'Ajaz' : ['Ajaz Ahmed','9955546834','ajazahmeddnr@gmail.com'],
+    'Waqar' : ['Waqar Yunus','9955546835','waqaryunusdnr@gmail.com'],
+    'Manzar' : ['Manzar Imam','9955546836','manzarimamdnr@gmail.com']
+}
+print(phonebook['Ajaz']) #Accesing whole list.
+print(phonebook['Ajaz'][0]) #Accesing the particular details of ajaz using index of the list.
