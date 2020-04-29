@@ -1,0 +1,35 @@
+"""
+@MeerAjaz
+Ajaz Ahmed
+Taking Paragraph from user and identifying to which standard it belongs according to USA curriculum.
+"""
+
+#from cs50 import get_string
+import re  #importing the regular expression.
+
+passage = input("Text: ") #taking the input from users.
+
+split_by_spaces = passage.split(" ")        #spilliting to count words.
+split_by_re = (re.split(r'[.!?]+',passage)) #spilliting to count sentence.
+
+
+letters = 0
+for i in range(27):   #counting letters of sentence.
+    letters += passage.count(chr(97 + i)) + passage.count(chr(65 + i))
+
+
+words = len(split_by_spaces) #counting the number of words.
+sentences = len(split_by_re) - 1  #counting the number of sentences.
+
+
+L = (letters * 100)/words   #letters per 100 words.
+S = (sentences * 100)/words #sentences per 100 words.
+
+index = round(0.0588 * L - 0.296 * S - 15.8) #using Scholastic formula and rounding it.
+
+if(index < 1):
+    print("Before grade 1")
+elif(index > 16):
+    print("Grade 16+")
+else:
+    print(f"Grade {index}")
