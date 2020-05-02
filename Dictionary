@@ -1,3 +1,4 @@
+#Declaring a dictionary.
 phonebook = {
     'Ajaz' : ['Ajaz Ahmed','9955546834','ajazahmeddnr@gmail.com'],
     'Waqar' : ['Waqar Yunus','9955546835','waqaryunusdnr@gmail.com'],
