@@ -1,0 +1,38 @@
+from bs4 import BeautifulSoup
+import requests
+import csv
+
+source = requests.get('https://coreyms.com/').text
+# print(source)
+
+soup = BeautifulSoup(source,'lxml')
+
+csv_file = open('file.csv','w')
+
+csv_writer = csv.writer(csv_file)
+csv_writer.writerow(['Headline','summary','video_link'])
+
+for article in soup.find_all('article'):
+    
+
+    headline = article.h2.a.text 
+    print(headline)
+
+    summary = article.find('div',class_='entry-content').p.text
+    print(summary)
+     
+    try:    
+        vid_src = article.find('iframe',class_='youtube-player')['src']
+        vid_link = vid_src.split('/')[4] #split the link by / and get the data of 4th index
+        vid_link = vid_link.split('?')[0] #further split the url by ? and get the data at 1st index basically link.
+
+        link = f'https://www.youtube.com/watch?v={vid_link}' #finally got the link.
+    except Exception as e:
+        link = 'None'
+    print(link)    
+    
+    print()
+    
+    csv_writer.writerow([headline, summary, vid_link])
+  
+csv_file.close()
