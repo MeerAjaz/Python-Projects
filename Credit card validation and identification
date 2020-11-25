@@ -1,0 +1,49 @@
+#A program to validate and identify a credit card.
+#@meer_ajaz
+#Ajaz Ahmed
+
+
+from cs50 import get_int
+
+Number = get_int("Number: ")
+while type(Number) != int:
+    Number = get_int("Number: ")
+
+
+Num_list = [int(x) for x in str(Number)] #taking input into a list.
+Num_list_copy = Num_list.copy() #making a copy of the list.
+length = len(Num_list) #finging length of the list.
+
+Num_list = Num_list[::-1]#reversing the list.
+
+for num in range(length): #multiplying every other number from the last of the list by two..
+   if(num % 2 == 0):
+      continue
+   Num_list[num] *= 2
+
+sum = 0
+for n in range(length): #summing up all the digits of the list.
+   if Num_list[n] >= 10:
+      sum += int(Num_list[n] / 10 + Num_list[n] % 10)
+   else:
+      sum += Num_list[n]
+
+if(sum % 10 == 0):  #validating the card and finding the card type.
+
+  #checking for american express.
+  if(length == 15 and Num_list_copy[0] == 3 and Num_list_copy[1] == 4 or Num_list_copy[1] == 7):
+    print("AMEX")
+
+  #checking for mastercard.
+  elif(length == 16 and Num_list_copy[0] == 5 and Num_list_copy[1] == 1 or Num_list_copy[1] == 2 or       Num_list_copy[1] == 3 or Num_list_copy[1] == 4 or Num_list_copy[1] == 5):
+    print("MASTERCARD")
+
+  #checking for visa card.
+  elif(length == 13 or length == 16 and Num_list_copy[0] == 4):
+    print("VISA")
+
+  else:
+    print("INVALID")
+
+else:
+  print("INVALID")
